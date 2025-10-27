@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="logo_gs.png">
+  <meta name="description"
+    content="G&S Auto Peças - Especialistas em peças elétricas e injeção eletrônica automotiva em Pelotas.">
+  <meta name="keywords" content="auto peças pelotas, peças elétricas, injeção eletrônica">
+  <title>G&S Auto Peças - Especialistas em Peças Elétricas e Injeção Eletrônica</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'gs-gray': '#b0b0af',
+            'gs-red': '#cb3127',
+            'gs-light': '#fafaf9',
+            'gs-dark': '#2c2c27',
+            'gs-gray-alt': '#b1b1b0',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script type="text/babel">
+    const { Zap, Cpu, Shield, Clock, Phone, Mail, MapPin, Check, Star, ChevronRight, ShoppingCart } = lucide;
+
+    function AutoPecasLP() {
+      const [formData, setFormData] = React.useState({
+        nome: '',
+        telefone: '',
+        email: '',
+        veiculo: '',
+        mensagem: ''
+      });
+
+      // PRODUTOS - adicione fotos e edite conforme necessário
+      const produtos = [
+        { nome: 'Lâmpada H7', preco: 'R$23,00', descricao: 'LAMPADA H7 F.BAIXO 55W/12V', imagem: 'lampada_h7.png' },
+        { nome: 'Porta Escova', preco: 'R$ 49,90', descricao: 'SUP.ESC.PT.ESC/FIESTA/KA', imagem: 'UFP12043.jpg' },
+        { nome: 'Buzina', preco: 'R$ 35,90', descricao: 'BUZ.IND.CARAC.C/SUP. GOL 98', imagem: 'vto210.jpg' },
+        { nome: 'Bendix', preco: 'R$ 110,50', descricao: 'BENDIX PT.PERKINS TDS.MOD.WPS', imagem: 'zen0024.jpg' },
+        { nome: 'Bico Injetor', preco: 'R$ 172,90', descricao: 'BICO INJ.EL.FIESTA/KA/COURIER', imagem: 'gi9905.jpg' },
+        { nome: 'Sonda Lambda', preco: 'R$ 435,90', descricao: 'SONDA LAMBDA PRE CIVIC/CRV', imagem: 'mte980140030.jpg' },
+        { nome: 'Alternador', preco: 'R$ 4770,90', descricao: 'ALT.CAM.MB311/313/415 11> LIN', imagem: 'va439653.jpg' },
+        { nome: 'Módulo de Ignição', preco: 'R$ 136,00', descricao: 'MOD.IG.GOL/TEMPRA 16V.S/DISIP', imagem: 'eig004.jpg' },
+      ];
+      const handleSubmit = (e) => {
+        e.preventDefault();
+
+        // Aqui você pode salvar os dados no banco de dados
+        // fetch('/api/salvar-lead', { method: 'POST', body: JSON.stringify(formData) })
+
+        const mensagemCodificada = encodeURIComponent(formData.mensagem);
+        window.open(`https://wa.me/5553999704730?text=${mensagemCodificada}`, '_blank');
+      };
+      const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+      };
+
+      React.useEffect(() => {
+        lucide.createIcons();
+      }, []);
+
+      return (
+        <div className="min-h-screen bg-gs-light text-gs-dark">
+          {/* Header */}
+          <header className="fixed top-0 w-full bg-gs-dark/95 backdrop-blur-sm z-50 border-b border-gs-red/30">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
+              <div className="flex items-center">
+                <img src="logo_gs.png" alt="G&S Auto Peças" className="h-12 md:h-16" />
+              </div>
+              <nav className="hidden md:flex space-x-8">
+                <a href="#servicos" className="text-gs-light hover:text-gs-red transition">Serviços</a>
+                <a href="#produtos" className="text-gs-light hover:text-gs-red transition">Produtos</a>
+                <a href="#contato" className="text-gs-light hover:text-gs-red transition">Contato</a>
+              </nav>
+              <a href="#contato" className="bg-gs-red text-gs-light px-6 py-2 rounded font-semibold hover:bg-gs-red/90 transition">
+                Orçamento
+              </a>
+            </div>
+          </header>
+
+          {/* Hero Section */}
+          <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gs-dark to-gs-dark/95">
+            <div className="max-w-7xl mx-auto">
+              <div className="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                  <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight text-gs-light">
+                    Peças Elétricas e<span className="text-gs-red"> Injeção Eletrônica</span>
+                  </h1>
+                  <p className="text-xl text-gs-gray mb-8">
+                    Soluções especializadas para o sistema elétrico e eletrônico do seu veículo.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <a href="#contato" className="bg-gs-red text-gs-light px-8 py-4 rounded font-bold text-lg hover:bg-gs-red/90 transition text-center">
+                      Solicitar Orçamento
+                    </a>
+                    <a href="tel:+5553999704730" className="border-2 border-gs-red text-gs-light px-8 py-4 rounded font-bold text-lg hover:bg-gs-red/10 transition text-center">
+                      Ligar Agora
+                    </a>
+                  </div>
+                </div>
+                <div className="relative bg-gs-dark/50 p-8 rounded-lg border border-gs-red/30">
+                  <div className="grid grid-cols-2 gap-6">
+                    <div className="bg-gs-dark/70 p-6 rounded-lg border border-gs-gray/20">
+                      <i data-lucide="zap" className="w-12 h-12 text-gs-red mb-4"></i>
+                      <h3 className="font-bold text-lg mb-2 text-gs-light">Sistema Elétrico</h3>
+                      <p className="text-sm text-gs-gray">Alternadores, motores de partida</p>
+                    </div>
+                    <div className="bg-gs-dark/70 p-6 rounded-lg border border-gs-gray/20">
+                      <i data-lucide="cpu" className="w-12 h-12 text-gs-red mb-4"></i>
+                      <h3 className="font-bold text-lg mb-2 text-gs-light">Injeção Eletrônica</h3>
+                      <p className="text-sm text-gs-gray">Sensores, módulos, bicos</p>
+                    </div>
+                    <div className="bg-gs-dark/70 p-6 rounded-lg border border-gs-gray/20">
+                      <i data-lucide="shield" className="w-12 h-12 text-gs-red mb-4"></i>
+                      <h3 className="font-bold text-lg mb-2 text-gs-light">Garantia</h3>
+                      <p className="text-sm text-gs-gray">Peças certificadas</p>
+                    </div>
+                    <div className="bg-gs-dark/70 p-6 rounded-lg border border-gs-gray/20">
+                      <i data-lucide="clock" className="w-12 h-12 text-gs-red mb-4"></i>
+                      <h3 className="font-bold text-lg mb-2 text-gs-light">Entrega Rápida</h3>
+                      <p className="text-sm text-gs-gray">Quando você precisa</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Products Section COM IMAGENS */}
+          <section id="produtos" className="py-20 px-4 sm:px-6 lg:px-8 bg-gs-red/5">
+            <div className="max-w-7xl mx-auto">
+              <div className="text-center mb-16">
+                <h2 className="text-4xl md:text-5xl font-bold mb-4">
+                  Produtos em <span className="text-gs-red">Destaque</span>
+                </h2>
+                <p className="text-xl text-gs-dark/70">Confira alguns itens do nosso estoque</p>
+              </div>
+
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {produtos.map((produto, index) => (
+                  <div key={index} className="bg-white rounded-lg border border-gs-gray/30 hover:border-gs-red/50 hover:shadow-lg transition overflow-hidden">
+                    <div className="h-48 bg-white flex items-center justify-center p-4 border-b border-gs-gray/20">
+                      {produto.imagem ? (
+                        <img src={produto.imagem} alt={produto.nome} className="max-h-full max-w-full object-contain" />
+                      ) : (
+                        <div className="w-full h-full bg-gs-red/10 rounded flex items-center justify-center">
+                          <i data-lucide="shopping-cart" className="w-16 h-16 text-gs-red/50"></i>
+                        </div>
+                      )}
+                    </div>
+                    <div className="p-6">
+                      <h3 className="text-lg font-bold mb-2">{produto.nome}</h3>
+                      <p className="text-sm text-gs-dark/60 mb-4">{produto.descricao}</p>
+                      <div className="flex items-center justify-between">
+                        <span className="text-2xl font-bold text-gs-red">{produto.preco}</span>
+                        <a
+                          href={`https://wa.me/5553999704730?text=Olá! Interesse no produto: ${produto.descricao}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-gs-red hover:text-gs-red/80 transition text-sm font-semibold"
+                        >
+                          Consultar →
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Contact Section */}
+          <section id="contato" className="py-20 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto">
+              <div className="grid md:grid-cols-2 gap-12">
+                <div>
+                  <h2 className="text-4xl font-bold mb-6">
+                    Solicite Seu <span className="text-gs-red">Orçamento</span>
+                  </h2>
+                  <div className="space-y-6">
+                    <div className="flex items-start space-x-4">
+                      <div className="bg-gs-red/10 p-3 rounded-lg">
+                        <i data-lucide="phone" className="w-6 h-6 text-gs-red"></i>
+                      </div>
+                      <div>
+                        <h3 className="font-bold mb-1">Telefone/WhatsApp</h3>
+                        <p className="text-gs-dark/70">(53) 99970-4730</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start space-x-4">
+                      <div className="bg-gs-red/10 p-3 rounded-lg">
+                        <i data-lucide="mail" className="w-6 h-6 text-gs-red"></i>
+                      </div>
+                      <div>
+                        <h3 className="font-bold mb-1">E-mail</h3>
+                        <p className="text-gs-dark/70">gsautopecaspelotas@gmail.com</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start space-x-4">
+                      <div className="bg-gs-red/10 p-3 rounded-lg">
+                        <i data-lucide="map-pin" className="w-6 h-6 text-gs-red"></i>
+                      </div>
+                      <div>
+                        <h3 className="font-bold mb-1">Endereço</h3>
+                        <p className="text-gs-dark/70">R. Marcílio Dias, 1216 - Centro, Pelotas - RS</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-white p-8 rounded-lg border border-gs-gray/30">
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Nome Completo</label>
+                      <input
+                        type="text"
+                        name="nome"
+                        value={formData.nome}
+                        onChange={handleChange}
+                        required
+                        className="w-full bg-gs-light border border-gs-gray/50 rounded px-4 py-3 focus:outline-none focus:border-gs-red transition"
+                        placeholder="Seu nome"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Telefone/WhatsApp</label>
+                      <input
+                        type="tel"
+                        name="telefone"
+                        value={formData.telefone}
+                        onChange={handleChange}
+                        required
+                        className="w-full bg-gs-light border border-gs-gray/50 rounded px-4 py-3 focus:outline-none focus:border-gs-red transition"
+                        placeholder="(00) 00000-0000"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">E-mail</label>
+                      <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                        className="w-full bg-gs-light border border-gs-gray/50 rounded px-4 py-3 focus:outline-none focus:border-gs-red transition"
+                        placeholder="seu@email.com"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Veículo</label>
+                      <input
+                        type="text"
+                        name="veiculo"
+                        value={formData.veiculo}
+                        onChange={handleChange}
+                        required
+                        className="w-full bg-gs-light border border-gs-gray/50 rounded px-4 py-3 focus:outline-none focus:border-gs-red transition"
+                        placeholder="Ex: Fiat Uno 2015"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Mensagem</label>
+                      <textarea
+                        name="mensagem"
+                        value={formData.mensagem}
+                        onChange={handleChange}
+                        rows="4"
+                        className="w-full bg-gs-light border border-gs-gray/50 rounded px-4 py-3 focus:outline-none focus:border-gs-red transition resize-none"
+                        placeholder="Descreva qual peça você precisa"
+                      ></textarea>
+                    </div>
+                    <button type="submit" className="w-full bg-gs-red text-gs-light py-4 rounded font-bold text-lg hover:bg-gs-red/90 transition">
+                      Enviar Solicitação
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Footer */}
+          <footer className="bg-gs-dark border-t border-gs-red/30 py-12 px-4">
+            <div className="max-w-7xl mx-auto">
+              <div className="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                  <img src="logo_gs.png" alt="G&S Auto Peças" className="h-12 mb-4" />
+                  <p className="text-gs-gray text-sm">Especialistas em peças elétricas e injeção eletrônica.</p>
+                </div>
+                <div>
+                  <h3 className="font-bold mb-4 text-gs-light">Contato</h3>
+                  <ul className="space-y-2 text-gs-gray text-sm">
+                    <li>(53) 99970-4730</li>
+                    <li>gsautopecaspelotas@gmail.com</li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="font-bold mb-4 text-gs-light">Localização</h3>
+                  <p className="text-gs-gray text-sm">R. Marcílio Dias, 1216<br />Centro - Pelotas - RS</p>
+                </div>
+              </div>
+              <div className="border-t border-gs-gray/30 pt-8 text-center text-gs-gray text-sm">
+                <p>© 2025 G&S Auto Peças. Todos os direitos reservados.</p>
+              </div>
+            </div>
+          </footer>
+
+          {/* WhatsApp Button */}
+          <a
+            href="https://wa.me/5553999704730"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="fixed bottom-6 right-6 bg-green-500 w-16 h-16 rounded-full flex items-center justify-center shadow-xl hover:scale-110 transition z-50"
+          >
+            <i data-lucide="phone" className="w-8 h-8 text-white"></i>
+          </a>
+        </div>
+      );
+    }
+
+    ReactDOM.render(<AutoPecasLP />, document.getElementById('root'));
+    setTimeout(() => { lucide.createIcons(); }, 100);
+  </script>
+</body>
+
+</html>
