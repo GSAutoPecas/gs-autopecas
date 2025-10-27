@@ -73,10 +73,12 @@
       const handleSubmit = (e) => {
         e.preventDefault();
 
-        // Aqui você pode salvar os dados no banco de dados
-        // fetch('/api/salvar-lead', { method: 'POST', body: JSON.stringify(formData) })
+        const mensagemCompleta = `${formData.mensagem}
 
-        const mensagemCodificada = encodeURIComponent(formData.mensagem);
+Nome: ${formData.nome}
+Carro: ${formData.veiculo}`;
+
+        const mensagemCodificada = encodeURIComponent(mensagemCompleta);
         window.open(`https://wa.me/5553999704730?text=${mensagemCodificada}`, '_blank');
       };
       const handleChange = (e) => {
@@ -194,6 +196,22 @@
                   </div>
                 ))}
               </div>
+              <div className="text-center mt-8 bg-gs-light p-6 rounded-lg border border-gs-red/20">
+                <p className="text-gs-dark/70 mb-2">
+                  <strong>Não encontrou o que procura?</strong>
+                </p>
+                <p className="text-gs-dark/60 mb-4">
+                  Temos muito mais peças disponíveis! Entre em contato via WhatsApp e consulte nosso estoque completo.
+                </p>
+                <a
+                  href="https://wa.me/5553999704730?text=Olá! Gostaria de consultar outras peças disponíveis no estoque"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block bg-green-500 text-white px-8 py-3 rounded font-semibold hover:bg-green-600 transition"
+                >
+                  Consultar Estoque Completo
+                </a>
+              </div>
             </div>
           </section>
 
@@ -232,6 +250,21 @@
                         <h3 className="font-bold mb-1">Endereço</h3>
                         <p className="text-gs-dark/70">R. Marcílio Dias, 1216 - Centro, Pelotas - RS</p>
                       </div>
+                    </div>
+                  </div>
+                  <div className="mt-8">
+                    <h3 className="font-bold mb-4 text-lg">Como Chegar</h3>
+                    <div className="rounded-lg overflow-hidden border border-gs-gray/30 shadow-lg">
+                      <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3406.0635668876547!2d-52.34247082347425!3d-31.771166974104916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9511b5f0c0c0c0c1%3A0x0!2sR.%20Marc%C3%ADlio%20Dias%2C%201216%20-%20Centro%2C%20Pelotas%20-%20RS!5e0!3m2!1spt-BR!2sbr!4v1234567890123!5m2!1spt-BR!2sbr"
+                        width="100%"
+                        height="300"
+                        style={{ border: 0 }}
+                        allowFullScreen=""
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                        title="Localização G&S Auto Peças"
+                      ></iframe>
                     </div>
                   </div>
                 </div>
@@ -301,6 +334,39 @@
                       Enviar Solicitação
                     </button>
                   </form>
+                </div>
+              </div>
+            </div>
+          </section>
+          {/* Sobre Nós Section */}
+          <section id="sobre" className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-4xl md:text-5xl font-bold mb-4">
+                  Sobre <span className="text-gs-red">Nós</span>
+                </h2>
+              </div>
+
+              <div className="bg-gs-light p-8 md:p-12 rounded-2xl border border-gs-gray/30 shadow-lg">
+                <div className="space-y-6 text-lg text-gs-dark/80 leading-relaxed">
+                  <p>
+                    A <strong className="text-gs-red">G&S Auto Peças</strong> foi fundada há 20 anos por <strong>Flavio Sabino</strong> e <strong>Gilmara Granvilla</strong>, conquistando a confiança de milhares de clientes em Pelotas e região ao longo dessas duas décadas de dedicação ao mercado automotivo.
+                  </p>
+
+                  <p>
+                    Hoje, sob a nova direção de <strong className="text-gs-red">Arthur Sabino</strong> e <strong className="text-gs-red">Angelo Frighetto</strong>, a empresa passa por uma renovação mantendo os valores de confiança, qualidade e compromisso que sempre foram a base do nosso trabalho.
+                  </p>
+
+                  <p>
+                    Trabalhamos com <strong>peças automotivas em geral</strong>, atendendo todas as necessidades do seu veículo. Nossa <strong className="text-gs-red">especialização está em peças elétricas e injeção eletrônica</strong>, onde oferecemos expertise técnica diferenciada, diagnóstico preciso e soluções avançadas para os sistemas eletrônicos do seu automóvel.
+                  </p>
+
+                  <div className="mt-8 pt-8 border-t border-gs-gray/30 flex justify-center">
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-gs-red mb-2">20</div>
+                      <div className="text-sm text-gs-dark/60">Anos de Experiência</div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
