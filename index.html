@@ -22,7 +22,6 @@
     gtag('js', new Date());
     gtag('config', 'G-FV6DLM01EN');
   </script>
-
   <script>
     tailwind.config = {
       theme: {
@@ -55,7 +54,7 @@
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <script type="text/babel">
-    const { Zap, Cpu, Shield, Clock, Phone, Mail, MapPin, Check, Star, ChevronRight, ShoppingCart } = lucide;
+    const { Zap, Cpu, Shield, Clock, Phone, Mail, MapPin, Check, Star, ChevronRight, ShoppingCart, ChevronLeft } = lucide;
 
     function AutoPecasLP() {
       const [formData, setFormData] = React.useState({
@@ -65,6 +64,28 @@
         veiculo: '',
         mensagem: ''
       });
+
+      // Estado e funções do carrossel
+      const [currentSlide, setCurrentSlide] = React.useState(0);
+      const totalSlides = 6;
+
+      const nextSlide = () => {
+        setCurrentSlide((prev) => (prev + 1) % totalSlides);
+      };
+
+      const previousSlide = () => {
+        setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
+      };
+
+      const goToSlide = (index) => {
+        setCurrentSlide(index);
+      };
+
+      // Auto-play do carrossel
+      React.useEffect(() => {
+        const interval = setInterval(nextSlide, 4000);
+        return () => clearInterval(interval);
+      }, []);
 
       // PRODUTOS - adicione fotos e edite conforme necessário
       const produtos = [
@@ -77,6 +98,41 @@
         { nome: 'Alternador', preco: 'R$ 4770,90', descricao: 'ALT.CAM.MB311/313/415 11> LIN', imagem: 'va439653.jpg' },
         { nome: 'Módulo de Ignição', preco: 'R$ 136,00', descricao: 'MOD.IG.GOL/TEMPRA 16V.S/DISIP', imagem: 'eig004.jpg' },
       ];
+
+      // Depoimentos expandidos
+      const depoimentos = [
+        {
+          texto: "Muito bem atendido.. prestação de serviço show de bola! A equipe é super atenciosa e sempre resolve meu problema rapidamente.",
+          autor: "Fabricio Silveira",
+          cargo: "Cliente de balcão"
+        },
+        {
+          texto: "Produtos de excelente qualidade e atendimento especial!! Recomendo! Sempre encontro o que preciso e os preços são justos.",
+          autor: "Eduardo Vighi",
+          cargo: "Cliente de balcão"
+        },
+        {
+          texto: "Excelente variedade de produtos e sempre encontro o que preciso. O atendimento técnico é diferenciado, realmente entendem do assunto.",
+          autor: "Roberto Oliveira",
+          cargo: "Mecânico Autônomo"
+        },
+        {
+          texto: "Trabalho com eles há anos e a confiança que tenho é total. Peças originais, garantia em tudo e um suporte técnico que faz toda diferença no dia a dia da oficina.",
+          autor: "Carlos Mendes",
+          cargo: "Proprietário de Oficina"
+        },
+        {
+          texto: "Precisava de uma peça urgente para meu caminhão e eles conseguiram em tempo recorde. Profissionalismo e comprometimento que fazem a diferença!",
+          autor: "João Ferreira",
+          cargo: "Caminhoneiro"
+        },
+        {
+          texto: "A G&S é referência em injeção eletrônica na região. Quando o problema é complexo, sei que posso contar com a expertise deles. Já resolveram vários casos que outros não conseguiram.",
+          autor: "Marina Costa",
+          cargo: "Eletricista Automotiva"
+        }
+      ];
+
       const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -88,13 +144,14 @@ Carro: ${formData.veiculo}`;
         const mensagemCodificada = encodeURIComponent(mensagemCompleta);
         window.open(`https://wa.me/5553999704730?text=${mensagemCodificada}`, '_blank');
       };
+
       const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
       };
 
       React.useEffect(() => {
         lucide.createIcons();
-      }, []);
+      }, [currentSlide]);
 
       return (
         <div className="min-h-screen bg-gs-light text-gs-dark">
@@ -104,15 +161,34 @@ Carro: ${formData.veiculo}`;
               <div className="flex items-center">
                 <img src="logo_gs.png" alt="G&S Auto Peças" className="h-12 md:h-16" />
               </div>
+
               <nav className="hidden md:flex space-x-8">
                 <a href="#servicos" className="text-gs-light hover:text-gs-red transition">Serviços</a>
                 <a href="#produtos" className="text-gs-light hover:text-gs-red transition">Produtos</a>
-                <a href="#contato" className="text-gs-light hover:text-gs-red transition">Contato</a>
                 <a href="#sobre" className="text-gs-light hover:text-gs-red transition">Sobre</a>
+                <a href="#contato" className="text-gs-light hover:text-gs-red transition">Contato</a>
               </nav>
-              <a href="#contato" className="bg-gs-red text-gs-light px-6 py-2 rounded font-semibold hover:bg-gs-red/90 transition">
-                Orçamento
-              </a>
+
+              <div className="flex items-center gap-4">
+                {/* Redes Sociais */}
+                <div className="hidden md:flex items-center gap-3">
+                  <a
+                    href="https://www.instagram.com/gsautopecaspel/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gs-light hover:text-gs-red transition p-2"
+                    aria-label="Instagram"
+                  >
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                    </svg>
+                  </a>
+                </div>
+
+                <a href="#contato" className="bg-gs-red text-gs-light px-6 py-2 rounded font-semibold hover:bg-gs-red/90 transition">
+                  Orçamento
+                </a>
+              </div>
             </div>
           </header>
 
@@ -121,11 +197,11 @@ Carro: ${formData.veiculo}`;
             <div className="max-w-7xl mx-auto">
               <div className="grid md:grid-cols-2 gap-12 items-center">
                 <div>
-                  <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight text-gs-light">
-                    Peças Elétricas e<span className="text-gs-red"> Injeção Eletrônica</span>
+                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-gs-light">
+                    Precisa da peça certa <span className="text-gs-red">agora?</span> Entrega rápida, preço justo e confiança de quem tem <span className="text-gs-red">20 anos de estrada.</span>
                   </h1>
                   <p className="text-xl text-gs-gray mb-8">
-                    Soluções especializadas para o sistema elétrico e eletrônico do seu veículo.
+                    Encontre a peça certa em minutos. Fale com um consultor especializado e receba um orçamento imediato.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4">
                     <a href="#contato" className="bg-gs-red text-gs-light px-8 py-4 rounded font-bold text-lg hover:bg-gs-red/90 transition text-center">
@@ -346,6 +422,7 @@ Carro: ${formData.veiculo}`;
               </div>
             </div>
           </section>
+
           {/* Sobre Nós Section */}
           <section id="sobre" className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
             <div className="max-w-4xl mx-auto">
@@ -375,6 +452,153 @@ Carro: ${formData.veiculo}`;
                       <div className="text-sm text-gs-dark/60">Anos de Experiência</div>
                     </div>
                   </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Depoimentos Section - CARROSSEL MELHORADO */}
+          <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gs-dark via-gs-dark/98 to-gs-dark relative overflow-hidden">
+            {/* Efeito de fundo decorativo */}
+            <div className="absolute inset-0 opacity-5">
+              <div className="absolute top-0 left-0 w-96 h-96 bg-gs-red rounded-full filter blur-3xl"></div>
+              <div className="absolute bottom-0 right-0 w-96 h-96 bg-gs-red rounded-full filter blur-3xl"></div>
+            </div>
+
+            <div className="max-w-7xl mx-auto relative z-10">
+              <div className="text-center mb-16">
+                <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gs-light">
+                  O Que Nossos Clientes <span className="text-gs-red">Dizem</span>
+                </h2>
+                <p className="text-xl text-gs-gray">
+                  Confiança construída ao longo de 20 anos de excelência
+                </p>
+              </div>
+
+              {/* Carrossel com visualização dos slides adjacentes */}
+              <div className="relative max-w-6xl mx-auto">
+                <div className="overflow-hidden px-4 md:px-16">
+                  <div
+                    className="flex transition-transform duration-700 ease-out"
+                    style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+                  >
+                    {depoimentos.map((depoimento, index) => {
+                      const isActive = index === currentSlide;
+                      const isPrev = index === (currentSlide - 1 + totalSlides) % totalSlides;
+                      const isNext = index === (currentSlide + 1) % totalSlides;
+                      const isVisible = isActive || isPrev || isNext;
+
+                      return (
+                        <div
+                          key={index}
+                          className={`min-w-full px-4 transition-all duration-700 ${
+                            isActive ? 'opacity-100 scale-100' : 'opacity-30 scale-90'
+                          }`}
+                          style={{
+                            transform: isActive ? 'translateZ(0)' : 'translateZ(-100px)',
+                          }}
+                        >
+                          <div className={`backdrop-blur-md rounded-3xl shadow-2xl border relative max-w-4xl mx-auto transition-all duration-700 ${
+                            isActive 
+                              ? 'bg-white/95 border-gs-red/40 p-8 md:p-12' 
+                              : 'bg-white/40 border-gs-gray/20 p-6 md:p-8'
+                          }`}>
+                            {/* Estrelas */}
+                            <div className="flex gap-1 mb-6 justify-center">
+                              {[...Array(5)].map((_, i) => (
+                                <i 
+                                  key={i} 
+                                  data-lucide="star" 
+                                  className={`w-5 h-5 text-gs-red fill-current transition-all duration-300 ${
+                                    isActive ? 'opacity-100' : 'opacity-50'
+                                  }`}
+                                ></i>
+                              ))}
+                            </div>
+
+                            {/* Aspas decorativas */}
+                            <div className={`absolute top-6 right-6 font-serif transition-all duration-300 ${
+                              isActive ? 'text-gs-red/10 text-7xl' : 'text-gs-red/5 text-5xl'
+                            }`}>"</div>
+
+                            {/* Texto do depoimento */}
+                            <p className={`italic mb-8 relative z-10 leading-relaxed text-center transition-all duration-300 ${
+                              isActive 
+                                ? 'text-gs-dark/90 text-lg md:text-xl' 
+                                : 'text-gs-dark/60 text-base md:text-lg'
+                            }`}>
+                              "{depoimento.texto}"
+                            </p>
+
+                            {/* Informações do autor */}
+                            <div className={`border-t pt-6 text-center transition-all duration-300 ${
+                              isActive ? 'border-gs-red/20' : 'border-gs-gray/10'
+                            }`}>
+                              <h4 className={`font-bold mb-1 transition-all duration-300 ${
+                                isActive 
+                                  ? 'text-gs-dark text-xl' 
+                                  : 'text-gs-dark/70 text-lg'
+                              }`}>
+                                {depoimento.autor}
+                              </h4>
+                              <p className={`transition-all duration-300 ${
+                                isActive 
+                                  ? 'text-gs-dark/60 text-base' 
+                                  : 'text-gs-dark/40 text-sm'
+                              }`}>
+                                {depoimento.cargo}
+                              </p>
+                            </div>
+
+                            {/* Badge de destaque para o slide ativo */}
+                            {isActive && (
+                              <div className="absolute top-4 right-4 bg-gs-red text-white px-4 py-2 rounded-lg text-xs font-semibold shadow-lg flex items-center gap-2">
+                                <i data-lucide="star" className="w-3 h-3 fill-current"></i>
+                                Destaque
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Botões de navegação com design melhorado */}
+                <button
+                  className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-gs-red text-gs-dark hover:text-white rounded-full p-4 shadow-2xl transition-all duration-300 hover:scale-110 z-20 backdrop-blur-sm"
+                  onClick={previousSlide}
+                  aria-label="Depoimento anterior"
+                >
+                  <i data-lucide="chevron-left" className="w-6 h-6"></i>
+                </button>
+                <button
+                  className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-gs-red text-gs-dark hover:text-white rounded-full p-4 shadow-2xl transition-all duration-300 hover:scale-110 z-20 backdrop-blur-sm"
+                  onClick={nextSlide}
+                  aria-label="Próximo depoimento"
+                >
+                  <i data-lucide="chevron-right" className="w-6 h-6"></i>
+                </button>
+
+                {/* Indicadores melhorados */}
+                <div className="flex justify-center gap-3 mt-12">
+                  {depoimentos.map((_, index) => (
+                    <button
+                      key={index}
+                      className={`rounded-full transition-all duration-300 ${
+                        currentSlide === index 
+                          ? 'bg-gs-red w-12 h-3' 
+                          : 'bg-white/40 w-3 h-3 hover:bg-white/60'
+                      }`}
+                      onClick={() => goToSlide(index)}
+                      aria-label={`Ir para depoimento ${index + 1}`}
+                    ></button>
+                  ))}
+                </div>
+
+                {/* Contador de slides */}
+                <div className="text-center mt-6 text-gs-gray text-sm">
+                  {currentSlide + 1} / {totalSlides}
                 </div>
               </div>
             </div>
